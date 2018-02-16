@@ -62,5 +62,5 @@ test = t.test(y1, y2, paired = TRUE)
 * Furthermore, the histogram of the differences (for point differential) shows that the mean is positive.
 
 
-![plot of chunk unnamed-chunk-4](assets/fig/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 * Conclusion: winning super bowl teams have averaged a better point differential than their super bowl opponents during the regular season and the difference is significantly different than zero (p-value < 0.05)
