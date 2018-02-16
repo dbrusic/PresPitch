@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Peer Graded Assignment 3</title>
+  <meta name="description" content="">
+  <meta name="author" content="Dan Brusic">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/moon.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  <h2>Peer Graded Assignment 3:</h2>
+  <h3>Analyzing Winning Super Bowl Teams</h3>
+
+<p>Dan Brusic<br>
+February 2018</p>
+
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h2>Purpose and Use</h2>
+  <p>The super bowl winners app (<a href="https://dbrusic.shinyapps.io/superbowlWinners/">link</a>) is intended to be a platform for the user to:</p>
+
+<ol>
+<li>analyze differences in individual statistics between winning and losing super bowl teams, </li>
+<li>identify meaningful statistics that potentially have predictive value,</li>
+<li>and examine which statistics winning teams have been better at over different time periods (for example, in recent years teams tend to pass the ball more than in the past so passing stats may be more important).</li>
+</ol>
+
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h2>Interpretation of Statistics</h2>
+  <ul>
+<li><p>The app explores 18 different statistics (collected from <a href="https://www.pro-football-reference.com/">Pro Football Reference</a> and the NFL&#39;s <a href="https://www.nfl.com/">website</a>) found in the drop-down list on the app page. These stats were collected for all 104 teams that have played in super bowls 1 to 52 (winners and losers). </p></li>
+<li><p>Offensive and defensive stats are categorized with an &quot;O&quot; and a &quot;D&quot; respectively. </p></li>
+<li><p>Defensive stats represent what the team&#39;s defense allowed opposing offenses to get (yards, touchdowns).</p></li>
+<li><p>The numbers used for the app are the differences in each stat between the winner and loser of each of the 52 super bowls (winner - loser). </p></li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-4'>
+  <h2>Example</h2>
+  <ul>
+<li><p>We want to analyze which stats are consistently different in favor of the winning teams. Further explanation of the plots and stats can be found on the app&#39;s webpage under the &quot;App Description&quot; tab.</p></li>
+<li><p>As an example, we can look at the difference in point differential for all years (1966 - 2017) between the winning and losing teams.</p></li>
+</ul>
+
+<pre><code class="r">y1 = sbTeams_winners[,&quot;pointdifferential&quot;]
+y2 = sbTeams_losers[,&quot;pointdifferential&quot;]
+test = t.test(y1, y2, paired = TRUE)
+</code></pre>
+
+<ul>
+<li>The p-value for the paired t-test for point differential for all years is 0.0093205</li>
+</ul>
+
+</section>
+<section class='' data-state='' id='slide-5'>
+  <h2>Example Continued</h2>
+  <ul>
+<li>Furthermore, the histogram of the differences (for point differential) shows that the mean is positive.</li>
+</ul>
+
+<p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"></p>
+
+<ul>
+<li>Conclusion: winning super bowl teams have averaged a better point differential than their super bowl opponents during the regular season and the difference is significantly different than zero (p-value &lt; 0.05)</li>
+</ul>
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'moon', 
+    transition: Reveal.getQueryHash().transition || 'concave', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
